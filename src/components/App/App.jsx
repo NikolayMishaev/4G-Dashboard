@@ -1,5 +1,6 @@
 import { useState , useEffect } from "react";
 import "./App.css";
+import { getOrdersServer,updateOrderServer } from "../../utils/OrdersAPI";
 
 function App() {
   const [pallets, setPallets] = useState([]);
@@ -8,306 +9,7 @@ function App() {
 
   const [currentOrder, setCurrentOrder] = useState({})
 
-  const [orders, setOrders] = useState([
-    {
-      id: "1",
-      number: "1290",
-      date: "25.10.2025",
-      marketplace: "Озон",
-      totalPallets: "12",
-      SKU: 10,
-      plan: 1278,
-      fact: 1290,
-      pallets: [
-        {
-          number: "1",
-          mono: "89",
-          mix: "0",
-          "without DM": "81",
-          SUMM: "170",
-          storeKeeper: "Молчан Олеся",
-          statusMono: "0",
-          statusMix: "0",
-        },
-                {
-          number: "2",
-          mono: "89",
-          mix: "0",
-          "without DM": "81",
-          SUMM: "170",
-          storeKeeper: "Молчан Олеся",
-          statusMono: "2",
-          statusMix: "1",
-        },
-                {
-          number: "3",
-          mono: "89",
-          mix: "0",
-          "without DM": "81",
-          SUMM: "170",
-          storeKeeper: "Молчан Олеся",
-          statusMono: "0",
-          statusMix: "3",
-        },
-      ],
-    },
-    {
-      id: "2",
-      number: "1291",
-      date: "14.06.2025",
-      marketplace: "ВБ",
-      totalPallets: "2",
-      SKU: 7,
-      plan: 452,
-      fact: 158,
-      pallets: [
-          {
-        number: "1",
-        mono: "94",
-        mix: "12",
-        withoutDM: "64",
-        SUMM: "170",
-        storeKeeper: "Оля Артур",
-        statusMono: "0",
-        statusMix: "4",
-      },
-              {
-          number: "2",
-          mono: "89",
-          mix: "0",
-          "without DM": "81",
-          SUMM: "170",
-          storeKeeper: "Молчан Олеся",
-          status: "2",
-        },
-      ],
-    },
-        {
-      id: "3",
-      number: "2225",
-      date: "14.06.2025",
-      marketplace: "ВБ",
-      totalPallets: "2",
-      SKU: 7,
-      plan: 1492,
-      fact: 211,
-      pallets: [
-          {
-        number: "1",
-        mono: "94",
-        mix: "12",
-        withoutDM: "64",
-        SUMM: "170",
-        storeKeeper: "Егор Саша",
-        statusMono: "0",
-        statusMix: "0",
-      },
-      {
-        number: "2",
-        mono: "94",
-        mix: "12",
-        withoutDM: "64",
-        SUMM: "170",
-        storeKeeper: "Оля Артур",
-        statusMono: "0",
-        statusMix: "5",
-      },
-      {
-        number: "3",
-        mono: "94",
-        mix: "12",
-        withoutDM: "64",
-        SUMM: "170",
-        storeKeeper: "Лысак А.",
-        statusMono: "0",
-        statusMix: "3",
-      },
-      {
-        number: "4",
-        mono: "94",
-        mix: "12",
-        withoutDM: "64",
-        SUMM: "170",
-        storeKeeper: "Оля Витя",
-        statusMono: "2",
-        statusMix: "4",
-      }
-      ],
-    },
-        {
-      id: "4",
-      number: "2202",
-      date: "14.06.2025",
-      marketplace: "Озон",
-      totalPallets: "16",
-      SKU: 7,
-      plan: 2050,
-      fact: 976,
-      pallets: [
-          {
-        number: "1",
-        mono: "94",
-        mix: "12",
-        withoutDM: "64",
-        SUMM: "170",
-        storeKeeper: "Оля Артур",
-        statusMono: "2",
-        statusMix: "2",
-      },
-              {
-          number: "2",
-          mono: "89",
-          mix: "0",
-          "without DM": "81",
-          SUMM: "170",
-          storeKeeper: "Молчан Олеся",
-          statusMono: "4",
-          statusMix: "0",
-        },
-                {
-          number: "3",
-          mono: "89",
-          mix: "0",
-          "without DM": "81",
-          SUMM: "170",
-          storeKeeper: "Молчан Олеся",
-          statusMono: "0",
-          statusMix: "0",
-        },
-                {
-          number: "4",
-          mono: "89",
-          mix: "0",
-          "without DM": "81",
-          SUMM: "170",
-          storeKeeper: "Молчан Олеся",
-          statusMono: "0",
-          statusMix: "0",
-        },
-                {
-          number: "5",
-          mono: "89",
-          mix: "0",
-          "without DM": "81",
-          SUMM: "170",
-          storeKeeper: "Молчан Олеся",
-          statusMono: "0",
-          statusMix: "0",
-        },
-                {
-          number: "6",
-          mono: "89",
-          mix: "0",
-          "without DM": "81",
-          SUMM: "170",
-          storeKeeper: "Молчан Олеся",
-          statusMono: "0",
-          statusMix: "0",
-        },
-                {
-          number: "7",
-          mono: "89",
-          mix: "0",
-          "without DM": "81",
-          SUMM: "170",
-          storeKeeper: "Молчан Олеся",
-          statusMono: "0",
-          statusMix: "0",
-        },
-                {
-          number: "8",
-          mono: "89",
-          mix: "0",
-          "without DM": "81",
-          SUMM: "170",
-          storeKeeper: "Молчан Олеся",
-          statusMono: "3",
-          statusMix: "0",
-        },
-                {
-          number: "9",
-          mono: "89",
-          mix: "0",
-          "without DM": "81",
-          SUMM: "170",
-          storeKeeper: "Молчан Олеся",
-          statusMono: "0",
-          statusMix: "0",
-        },
-                {
-          number: "10",
-          mono: "89",
-          mix: "0",
-          "without DM": "81",
-          SUMM: "170",
-          storeKeeper: "Молчан Олеся",
-          statusMono: "0",
-          statusMix: "4",
-        },
-                {
-          number: "11",
-          mono: "89",
-          mix: "0",
-          "without DM": "81",
-          SUMM: "170",
-          storeKeeper: "Молчан Олеся",
-          statusMono: "3",
-          statusMix: "3",
-        },
-                {
-          number: "12",
-          mono: "89",
-          mix: "0",
-          "without DM": "81",
-          SUMM: "170",
-          storeKeeper: "Молчан Олеся",
-          statusMono: "5",
-          statusMix: "0",
-        },
-                {
-          number: "13",
-          mono: "89",
-          mix: "0",
-          "without DM": "81",
-          SUMM: "170",
-          storeKeeper: "Молчан Олеся",
-          statusMono: "0",
-          statusMix: "1",
-        },
-                {
-          number: "14",
-          mono: "89",
-          mix: "0",
-          "without DM": "81",
-          SUMM: "170",
-          storeKeeper: "Молчан Олеся",
-          statusMono: "0",
-          statusMix: "1",
-        },
-                {
-          number: "15",
-          mono: "89",
-          mix: "0",
-          "without DM": "81",
-          SUMM: "170",
-          storeKeeper: "Молчан Олеся",
-          statusMono: "3",
-          statusMix: "0",
-        },
-                {
-          number: "16",
-          mono: "89",
-          mix: "0",
-          "without DM": "81",
-          SUMM: "170",
-          storeKeeper: "Молчан Олеся",
-          statusMono: "2",
-          statusMix: "1",
-        },
-        
-      ],
-    },
-  ]);
+  const [orders, setOrders] = useState([]);
 
   function handleSelectPallet(e) {
     activePallet.classList?.remove("activePallet");
@@ -342,6 +44,13 @@ function App() {
   }
 
     useEffect(() => {
+        getOrdersServer().then(orders => {
+            if (Array.isArray(orders)) setOrders(orders)
+        }).catch(error => console.log(error))
+    }, []);
+
+    useEffect(() => {
+      if (pallets.length) updateOrderServer(currentOrder.orderID, {pallets : pallets}).then(data=>console.log(data))
       setOrders(orders.map((order => {
         if (order.id !== currentOrder.orderID) return order;
         else return { ...order, pallets}
@@ -393,9 +102,9 @@ function App() {
     <div className="body">
       <div className="orderPanel">
         <div className="orderTitle">
-          <p className="orderTitle__item">Отгрузка</p>
-          <p className="orderTitle__item">Дата</p>
-          <p className="orderTitle__item">Склад</p>
+          <p className="orderTitle__item" style={{minWidth:"110px"}}>Отгрузка</p>
+          <p className="orderTitle__item" style={{minWidth:"55px"}}>Дата</p>
+          <p className="orderTitle__item" style={{minWidth:"80px"}}>Склад</p>
           <p className="orderTitle__item">Кол-во SKU</p>
           <p className="orderTitle__item">Кол-во план</p>
           <p className="orderTitle__item">Кол-во факт</p>
@@ -408,7 +117,7 @@ function App() {
       <div className="progressPanel">
         <div className="progress">
           <h2 className="progress__header">{currentOrder.orderName || `выберите отгрузку`}</h2>
-          {currentOrder.length ? <div className="progress__title">
+          {currentOrder.orderName ? <div className="progress__title">
             <p className="progress__item">палет</p>
             <p className="progress__item">моно</p>
             <p className="progress__item">микс</p>
