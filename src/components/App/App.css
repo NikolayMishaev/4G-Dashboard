@@ -174,6 +174,7 @@
   text-align: center;
   font-weight: bold;
   margin-bottom: 0;
+  margin-left: 10px;
 }
 
 .orderTitle__item_last {
@@ -215,8 +216,20 @@
 }
 
 .ordersContainer__bar {
-  border: 1px solid grey;
-  border-radius: 10px;
+  /* border-right: 1px solid grey; */
+  border-radius: 5px;
   background-color: lightgreen;
   height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.ordersContainer__wrapper {
+  width: 100%;
+  height: 100%;
+  border: 1px solid grey;
+  border-radius: 5px;
+  position: relative;
 }
